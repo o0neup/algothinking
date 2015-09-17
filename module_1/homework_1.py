@@ -6,6 +6,7 @@ author: 'artemkorkhov'
 
 import urllib2
 import math
+import random
 import matplotlib.pyplot as plt
 
 from .project_1 import in_degree_distribution
@@ -24,7 +25,7 @@ def load_graph(graph_url):
     graph_file = urllib2.urlopen(graph_url)
     graph_text = graph_file.read()
     graph_lines = graph_text.split('\n')
-    graph_lines = graph_lines[ : -1]
+    graph_lines = graph_lines[: -1]
 
     print "Loaded graph with", len(graph_lines), "nodes"
 
@@ -72,7 +73,17 @@ def er_directed(num_nodes, prob):
     :param prob:
     :return:
     """
+    _nodes = set(range(num_nodes))
+    return {
+        node: set([nd for nd in _nodes.difference(set(node)) if random.random() < prob])
+        for node in range(num_nodes)
+    }
+
+
+def dpa(n, m):
+    """
+    :param n:
+    :param m:
+    :return:
+    """
     raise NotImplementedError
-
-
-
