@@ -68,14 +68,16 @@ def compute_in_degrees(digraph):
     if not isinstance(digraph, dict):
         raise ValueError("digraph must be dict!")
     in_degrees = {}
-    size = set(digraph.keys())
     for node in digraph:
         in_degrees.setdefault(node, 0)
-        for other_node in size.difference(set([node])):
-            if node in digraph[other_node]:
-                in_degrees[node] += 1
-            else:
+        for other_node in digraph:
+            if node == other_node:
                 continue
+            else:
+                if node in digraph[other_node]:
+                    in_degrees[node] += 1
+        if node % 1000 == 0:
+            print "computed %s nodes" % node
     return in_degrees
 
 
